@@ -164,21 +164,23 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
   }
 });
 
-router.delete('/:id',auth,async(req,res)=>{
-    try {
-        const post = await Post.findById(req.params.id);
-        if (!post) {
-            return res.status(404).json({ msg: "Post does not exist" });
-          }
-          if (post.user.toString() !== req.user.id) {
-            return res.status(401).json({ msg: "User is not authorized to remove this post" });
-          }
-          await post.remove();
+router.delete('/:id', auth, async (req, res) => {
+  try {
+      const post = await Post.findById(req.params.id);
+      if (!post) {
+          return res.status(404).json({ msg: "Post does not exist" });
+      }
+      if (post.user.toString() !== req.user.id) {
+          return res.status(401).json({ msg: "User is not authorized to remove this post" });
+      }
+      
+      await Post.findByIdAndDelete(req.params.id);
 
-          res.json({msh:'Post Deleted Successfully'});
-    } catch (err) {
-        console.error(err.message);
-        return res.status(500).send(err.message);
-    }
-})
+      res.json({ msg: 'Post Deleted Successfully' });
+  } catch (err) {
+      console.error(err.message);
+      return res.status(500).send(err.message);
+  }
+});
+
 export default router;
