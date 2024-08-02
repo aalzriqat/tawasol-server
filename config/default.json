@@ -1,0 +1,7 @@
+{
+    "mongoConnectionString":"mongodb+srv://aalzriqat:Ouh3whov%40%403@cluster0.mh1rc0p.mongodb.net/TAWASOOOOLZ?retryWrites=true&w=majority&appName=Cluster0",
+    "jwtSecret":"jwtSecretToken"
+}
+
+
+
